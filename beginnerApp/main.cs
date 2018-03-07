@@ -31,6 +31,9 @@ class BeginningApp
                 case 3:
                     detectPalindrome();
                     break;
+                case 4:
+                    sortNumberList();
+                    break;
                 default:
                     Console.WriteLine("Invalid choice!");
                     break;
@@ -77,6 +80,26 @@ class BeginningApp
         }
         Console.WriteLine("{0} is indeed a palindrome", input);
     }
+
+    static void sortNumberList()
+    {
+        Console.WriteLine("****Sort a list of Numbers****");
+        string input = "0";
+        int[] inputArray = new int[20];
+        int i = 0;
+        int output;
+        while (input != "s" && i < 20) {
+            Console.WriteLine("Please input a number. Enter 's' to stop entering numbers.");
+            input = Console.ReadKey().KeyChar.ToString();
+            if (!(int.TryParse(input, out output)) && input != "s") {
+                Console.WriteLine("Invalid input. Try again.");
+                continue;
+            } else {
+                inputArray[i++] = output;
+                Console.WriteLine("\nNumber added");
+            }
+        }
+    }
 }
 
 class Actions
@@ -86,7 +109,8 @@ class Actions
         "Exit App",
         "Calculate Pi to the Nth degree",
         "Reverse a string",
-        "Detirmine a palindrome"
+        "Detirmine a palindrome",
+        "Sort a list of numbers"
     };
 
     public string[] getActions()
