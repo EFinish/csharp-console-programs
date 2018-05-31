@@ -7,42 +7,50 @@ class BeginningApp
     {
         Console.WriteLine("Please input your name:");
         Console.WriteLine("Name given: {0}", Console.ReadLine());
-        Actions action = new Actions();
-        string[] actions = action.getActions();
-        bool appRunning = true;
-        while (appRunning) {
+        AppConfig config = new AppConfig();
+        string[] actions = config.getActions();
+        while (config.getAppRunning()) {
             Console.WriteLine("Please select a choice");
             for (int i = 0; i < actions.Length; i++) {
                 Console.WriteLine("{0}.) {1}", i, actions[i]);
             }
-            int choice = Convert.ToInt32(Console.ReadLine());
+            string input = Console.ReadLine();
+            int choice = Convert.ToInt32(input);
+            int choiceCheck;
             Console.WriteLine("Your choice: {0}", choice);
-            switch(choice) {
-                case 0:
-                    Console.WriteLine("Ending Program.");
-                    appRunning = false;
-                    break;
-                case 1:
-                    calcPiToNth();
-                    break;
-                case 2:
-                    reverseString();
-                    break;
-                case 3:
-                    detectPalindrome();
-                    break;
-                case 4:
-                    sortNumberList();
-                    break;
-                case 5:
-                    calcFibbonacciToNth();
-                    break;
-                default:
-                    Console.WriteLine("Invalid choice!!");
-                    break;
+            if (!(int.TryParse(input, out choiceCheck)) || choice > actions.Length || choice < 0) {
+                Console.WriteLine("Invalid choice!!");
+                return;
+            } else {
+                config.callFunction(choice);
             }
+            // switch(choice) {
+            //     case 0:
+            //         Console.WriteLine("Ending Program.");
+            //         appRunning = false;
+            //         break;
+            //     case 1:
+            //         calcPiToNth();
+            //         break;
+            //     case 2:
+            //         reverseString();
+            //         break;
+            //     case 3:
+            //         detectPalindrome();
+            //         break;
+            //     case 4:
+            //         sortNumberList();
+            //         break;
+            //     case 5:
+            //         calcFibbonacciToNth();
+            //         break;
+            //     default:
+            //         Console.WriteLine("Invalid choice!!");
+            //         break;
+            // }
         }
     }
+
 
     static void calcPiToNth()
     {
@@ -136,24 +144,85 @@ class BeginningApp
     }
 }
 
-class Actions
+class AppConfig
 {
-    //always try to use string instead of String
-    public string[] _actions = {
-        "Exit App",
-        "Calculate Pi to the Nth degree",
-        "Reverse a string",
-        "Detirmine a palindrome",
-        "Sort a list of numbers",
-        "Calculate Fibbonaci Sequence to Nth degree"
-    };
+    protected Action[] actions = (
+        new Action(
+            "Exit App",
+            endProgram
+        ),
+        new Action(
+            "Calculate Pi to the Nth degree",
+            calcPiToNth
+        ),
+        new Action(
+            "Reverse a string",
+            reverseString
+        ),
+        new Action(
+            "Detirmine a palindrome",
+            detectPalindrome
+        ),
+        new Action(
+            "Sort a list of numbers",
+            sortNumberList
+        ),
+        new Action(
+            "Calculate Fibbonaci Sequence to Nth degree",
+            calcFibbonacciToNth
+        )
+    );
+
+    protected bool appRunning = true; 
+
+    public void endProgram()
+    {
+        Console.WriteLine("Ending Program.");
+        this.appRunning = false;
+    }
 
     public string[] getActions()
     {
-        return _actions;
+        int numActions = this.actions.Length;
+        string[] results = new string[numActions];
+        for(int i = 0; i < numActions; i++) {
+            results[i] = this.actions[i].getActionName();
+        }
+        return results;
     }
 
-    public bool checkIfValidAction(int choice) {
-        return choice < _actions.Length;
+    public bool getAppRunning()
+    {
+        return this.appRunning;
     }
+
+    public void callFunction(int i)
+    {
+        this.actions[i].callFunction();
+    }
+}
+
+class Action 
+{
+    public string _actionName;
+    public delegate void _callBack();
+    _callBack _functionName;
+
+    public Action(string actionName, _callBack nameOfFunction)
+    {
+        this._actionName = actionName;
+        this._functionName = functionName;
+    }
+
+    public string getActionName()
+    {
+        return this._actionName;
+    }
+
+    public void callFunction()
+    {
+        this._functionName();
+    }
+
+
 }
