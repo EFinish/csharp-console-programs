@@ -34,6 +34,9 @@ class BeginningApp
                 case 4:
                     sortNumberList();
                     break;
+                case 5:
+                    calcFibbonacciToNth();
+                    break;
                 default:
                     Console.WriteLine("Invalid choice!");
                     break;
@@ -100,6 +103,35 @@ class BeginningApp
             }
         }
     }
+
+    // Fibbonacci number is the sum of the two preceding numbers
+    static void calcFibbonacciToNth()
+    {
+        Console.WriteLine("****Calculate Fibbonacci Sequence to the Nth Degree****\nPlease enter a value for n:");
+        string input = Console.ReadLine();
+        int n;
+        int result = 0;
+        if (!(int.TryParse(input, out n)) || n < 0) {
+            Console.WriteLine("ERROR: Input must be a non-negative integer. Exiting Calc pi to nth degree...");
+            return;
+        } else if (n != 0) {
+            result = calcFibbonacci(n, 1, 0);
+        }
+        Console.WriteLine("Result: Fibbonacci Sequence to {0} degree is: {1}", n, result);
+    }
+
+    static int calcFibbonacci(int n, int oneNumPrevious, int twoPrevious)
+    {
+        if (n == 0) {
+            return oneNumPrevious;
+        } else {
+            return calcFibbonacci(
+                (n - 1),
+                (oneNumPrevious + twoPrevious),
+                oneNumPrevious
+            );
+        }
+    }
 }
 
 class Actions
@@ -110,7 +142,8 @@ class Actions
         "Calculate Pi to the Nth degree",
         "Reverse a string",
         "Detirmine a palindrome",
-        "Sort a list of numbers"
+        "Sort a list of numbers",
+        "Calculate Fibbonaci Sequence to Nth degree"
     };
 
     public string[] getActions()
