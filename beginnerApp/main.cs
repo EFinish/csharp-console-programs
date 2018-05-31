@@ -110,11 +110,13 @@ class BeginningApp
         Console.WriteLine("****Calculate Fibbonacci Sequence to the Nth Degree****\nPlease enter a value for n:");
         string input = Console.ReadLine();
         int n;
-        int result = 0;
+        int result;
         if (!(int.TryParse(input, out n)) || n < 0) {
             Console.WriteLine("ERROR: Input must be a non-negative integer. Exiting Calc pi to nth degree...");
             return;
-        } else if (n != 0) {
+        } else if (n == 0) {
+            result = 0;
+        } else {
             result = calcFibbonacci(n, 1, 0);
         }
         Console.WriteLine("Result: Fibbonacci Sequence to {0} degree is: {1}", n, result);
@@ -122,7 +124,7 @@ class BeginningApp
 
     static int calcFibbonacci(int n, int oneNumPrevious, int twoPrevious)
     {
-        if (n == 0) {
+        if (n == 1) {
             return oneNumPrevious;
         } else {
             return calcFibbonacci(
