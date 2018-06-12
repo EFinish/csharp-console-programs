@@ -3,4 +3,7 @@ then
     rm main.exe
 fi
 mcs main.cs
-mono main.exe
+if [ -e "main.exe" ]
+then
+    mono main.exe
+fi
