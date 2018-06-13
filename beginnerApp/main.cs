@@ -7,52 +7,29 @@ class BeginningApp
     {
         Console.WriteLine("Please input your name:");
         Console.WriteLine("Name given: {0}", Console.ReadLine());
-        // AppConfig config = new AppConfig();
-        // string[] actions = config.getActions();
-        // while (config.getAppRunning()) {
-        //     Console.WriteLine("Please select a choiasdasdadce");
-        //     for (int i = 0; i < actions.Length; i++) {
-        //         Console.WriteLine("{0}.) {1}", i, actions[i]);
-        //     }
-        //     string input = Console.ReadLine();
-        //     int choice = Convert.ToInt32(input);
-        //     int choiceCheck;
-        //     Console.WriteLine("Your choice: {0}", choice);
-        //     if (!(int.TryParse(input, out choiceCheck)) || choice > actions.Length || choice < 0) {
-        //         Console.WriteLine("Invalid choice!!");
-        //         return;
-        //     } else {
-        //         config.callFunction(choice);
-        //     }
-        //     // switch(choice) {
-        //     //     case 0:
-        //     //         Console.WriteLine("Ending Program.");
-        //     //         appRunning = false;
-        //     //         break;
-        //     //     case 1:
-        //     //         calcPiToNth();
-        //     //         break;
-        //     //     case 2:
-        //     //         reverseString();
-        //     //         break;
-        //     //     case 3:
-        //     //         detectPalindrome();
-        //     //         break;
-        //     //     case 4:
-        //     //         sortNumberList();
-        //     //         break;
-        //     //     case 5:
-        //     //         calcFibbonacciToNth();
-        //     //         break;
-        //     //     default:
-        //     //         Console.WriteLine("Invalid choice!!");
-        //     //         break;
-        //     // }
-        // }
+        AppConfig config = new AppConfig();
+        string[] actions = config.getActions();
+        while (config.getAppRunning()) {
+            Console.WriteLine("Please select a choice");
+            Console.WriteLine("0.) End program");
+            for (int i = 1; i < actions.Length; i++) {
+                Console.WriteLine("{0}.) {1}", i, actions[i]);
+            }
+            string input = Console.ReadLine();
+            int choice = Convert.ToInt32(input);
+            int choiceCheck;
+            Console.WriteLine("Your choice: {0}", choice);
+            if (!(int.TryParse(input, out choiceCheck)) || choice > actions.Length || choice < 0) {
+                Console.WriteLine("Invalid choice!!");
+                return;
+            } else {
+                config.callFunction(choice);
+            }
+        }
     }
 
 
-    public void calcPiToNth()
+    public static void calcPiToNth()
     {
         Console.WriteLine("****Calculating Pi to the Nth degree****\nPlease enter a value, less no more than 15, for n:");
         string input = Console.ReadLine();
@@ -64,7 +41,7 @@ class BeginningApp
         Console.WriteLine(Math.Round(Math.PI, n));
     }
 
-    public void reverseString()
+    public static void reverseString()
     {
         Console.WriteLine("****Reverse a string****\nPlease enter a string to reverse:");
         string input = Console.ReadLine();
@@ -76,7 +53,7 @@ class BeginningApp
         Console.WriteLine(newString);
     }
 
-    public void detectPalindrome()
+    public static void detectPalindrome()
     {
         Console.WriteLine("****Reverse a string****\nPlease enter a string to detect whether it is a palindrome or not:");
         string input = Console.ReadLine();
@@ -92,7 +69,7 @@ class BeginningApp
         Console.WriteLine("{0} is indeed a palindrome", input);
     }
 
-    public void sortNumberList()
+    public static void sortNumberList()
     {
         Console.WriteLine("****Sort a list of Numbers****");
         string input = "0";
@@ -114,7 +91,7 @@ class BeginningApp
     }
 
     // Fibbonacci number is the sum of the two preceding numbers
-    public void calcFibbonacciToNth()
+    public static void calcFibbonacciToNth()
     {
         Console.WriteLine("****Calculate Fibbonacci Sequence to the Nth Degree****\nPlease enter a value for n:");
         string input = Console.ReadLine();
@@ -131,7 +108,7 @@ class BeginningApp
         Console.WriteLine("Result: Fibbonacci Sequence to {0} degree is: {1}", n, result);
     }
 
-    public int calcFibbonacci(int n, int oneNumPrevious, int twoPrevious)
+    public static int calcFibbonacci(int n, int oneNumPrevious, int twoPrevious)
     {
         if (n == 1) {
             return oneNumPrevious;
@@ -144,7 +121,7 @@ class BeginningApp
         }
     }
 
-    public void imperialMetricWeightConversion()
+    public static void imperialMetricWeightConversion()
     {
         
     }
@@ -179,32 +156,28 @@ class AppConfig
 {
     protected Action[] actions = new Action[] {
         new Action(
-            "Exit App",
-            endProgram
-        ),
-        new Action(
             "Calculate Pi to the Nth degree",
-            calcPiToNth
+            BeginningApp.calcPiToNth
         ),
         new Action(
             "Reverse a string",
-            reverseString
+            BeginningApp.reverseString
         ),
         new Action(
             "Detirmine a palindrome",
-            detectPalindrome
+            BeginningApp.detectPalindrome
         ),
         new Action(
             "Sort a list of numbers",
-            sortNumberList
+            BeginningApp.sortNumberList
         ),
         new Action(
             "Calculate Fibbonaci Sequence to Nth degree",
-            calcFibbonacciToNth
+            BeginningApp.calcFibbonacciToNth
         ),
         new Action(
             "Imperial/Metric Weight Conversion",
-            imperialMetricWeightConversion
+            BeginningApp.imperialMetricWeightConversion
         )
     };
 
@@ -233,6 +206,10 @@ class AppConfig
 
     public void callFunction(int i)
     {
-        this.actions[i].callFunction();
+        if (i == 0) {
+            this.endProgram();
+        } else {
+            this.actions[i-1].callFunction();
+        }
     }
 }
