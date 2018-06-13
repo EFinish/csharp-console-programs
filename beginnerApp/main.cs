@@ -1,6 +1,5 @@
 using System;
 
-
 class BeginningApp
 {
 
@@ -8,48 +7,48 @@ class BeginningApp
     {
         Console.WriteLine("Please input your name:");
         Console.WriteLine("Name given: {0}", Console.ReadLine());
-        AppConfig config = new AppConfig();
-        string[] actions = config.getActions();
-        while (config.getAppRunning()) {
-            Console.WriteLine("Please select a choiasdasdadce");
-            for (int i = 0; i < actions.Length; i++) {
-                Console.WriteLine("{0}.) {1}", i, actions[i]);
-            }
-            string input = Console.ReadLine();
-            int choice = Convert.ToInt32(input);
-            int choiceCheck;
-            Console.WriteLine("Your choice: {0}", choice);
-            if (!(int.TryParse(input, out choiceCheck)) || choice > actions.Length || choice < 0) {
-                Console.WriteLine("Invalid choice!!");
-                return;
-            } else {
-                config.callFunction(choice);
-            }
-            // switch(choice) {
-            //     case 0:
-            //         Console.WriteLine("Ending Program.");
-            //         appRunning = false;
-            //         break;
-            //     case 1:
-            //         calcPiToNth();
-            //         break;
-            //     case 2:
-            //         reverseString();
-            //         break;
-            //     case 3:
-            //         detectPalindrome();
-            //         break;
-            //     case 4:
-            //         sortNumberList();
-            //         break;
-            //     case 5:
-            //         calcFibbonacciToNth();
-            //         break;
-            //     default:
-            //         Console.WriteLine("Invalid choice!!");
-            //         break;
-            // }
-        }
+        // AppConfig config = new AppConfig();
+        // string[] actions = config.getActions();
+        // while (config.getAppRunning()) {
+        //     Console.WriteLine("Please select a choiasdasdadce");
+        //     for (int i = 0; i < actions.Length; i++) {
+        //         Console.WriteLine("{0}.) {1}", i, actions[i]);
+        //     }
+        //     string input = Console.ReadLine();
+        //     int choice = Convert.ToInt32(input);
+        //     int choiceCheck;
+        //     Console.WriteLine("Your choice: {0}", choice);
+        //     if (!(int.TryParse(input, out choiceCheck)) || choice > actions.Length || choice < 0) {
+        //         Console.WriteLine("Invalid choice!!");
+        //         return;
+        //     } else {
+        //         config.callFunction(choice);
+        //     }
+        //     // switch(choice) {
+        //     //     case 0:
+        //     //         Console.WriteLine("Ending Program.");
+        //     //         appRunning = false;
+        //     //         break;
+        //     //     case 1:
+        //     //         calcPiToNth();
+        //     //         break;
+        //     //     case 2:
+        //     //         reverseString();
+        //     //         break;
+        //     //     case 3:
+        //     //         detectPalindrome();
+        //     //         break;
+        //     //     case 4:
+        //     //         sortNumberList();
+        //     //         break;
+        //     //     case 5:
+        //     //         calcFibbonacciToNth();
+        //     //         break;
+        //     //     default:
+        //     //         Console.WriteLine("Invalid choice!!");
+        //     //         break;
+        //     // }
+        // }
     }
 
 
@@ -151,9 +150,34 @@ class BeginningApp
     }
 }
 
+class Action 
+{
+    public string _actionName;
+    public delegate void _callBack();
+    _callBack _functionName;
+
+    public Action(string actionName, _callBack nameOfFunction)
+    {
+        this._actionName = actionName;
+        this._functionName = nameOfFunction;
+    }
+
+    public string getActionName()
+    {
+        return this._actionName;
+    }
+
+    public void callFunction()
+    {
+        this._functionName();
+    }
+
+
+}
+
 class AppConfig
 {
-    protected Action[] actions = (
+    protected Action[] actions = new Action[] {
         new Action(
             "Exit App",
             endProgram
@@ -182,7 +206,7 @@ class AppConfig
             "Imperial/Metric Weight Conversion",
             imperialMetricWeightConversion
         )
-    );
+    };
 
     protected bool appRunning = true; 
 
@@ -211,29 +235,4 @@ class AppConfig
     {
         this.actions[i].callFunction();
     }
-}
-
-class Action 
-{
-    public string _actionName;
-    public delegate void _callBack();
-    _callBack _functionName;
-
-    public Action(string actionName, _callBack nameOfFunction)
-    {
-        this._actionName = actionName;
-        this._functionName = functionName;
-    }
-
-    public string getActionName()
-    {
-        return this._actionName;
-    }
-
-    public void callFunction()
-    {
-        this._functionName();
-    }
-
-
 }
