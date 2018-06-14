@@ -12,8 +12,8 @@ class BeginningApp
         while (config.getAppRunning()) {
             Console.WriteLine("Please select a choice");
             Console.WriteLine("0.) End program");
-            for (int i = 1; i < actions.Length; i++) {
-                Console.WriteLine("{0}.) {1}", i, actions[i]);
+            for (int i = 0; i < actions.Length; i++) {
+                Console.WriteLine("{0}.) {1}", i+1, actions[i]);
             }
             string input = Console.ReadLine();
             int choice = Convert.ToInt32(input);
@@ -123,7 +123,34 @@ class BeginningApp
 
     public static void imperialMetricWeightConversion()
     {
-        
+        Console.WriteLine("****Imperial/Metric Weight Conversion****\nPlease enter 'lbs' to convert pounds to kilograms or"+
+        "'kg' to convert kilograms to pounds:");
+        string input = Console.ReadLine();
+        double n;
+        double result;
+        if (input == "lbs") {
+            //convert pounds to kg
+            Console.WriteLine("Pounds selected.\nPlease enter the number of pounds to convert to kilograms:");
+            input = Console.ReadLine();
+            if (!(double.TryParse(input, out n))) {
+                Console.WriteLine("ERROR: Input must be a number. Exiting imperial/metric weight coversion...");
+                return;
+            } else {
+                result = n * 0.4535924;
+                Console.WriteLine("Result: {0} pounds = {1} kilograms.", n, result);
+            }
+        } else if (input == "kg") {
+            //convert kg to pounds
+            Console.WriteLine("Kilograms selected.\nPlease enter the number of pounds to convert to kilograms:");
+            input = Console.ReadLine();
+            if (!(double.TryParse(input, out n))) {
+                Console.WriteLine("ERROR: Input must be a number. Exiting imperial/metric weight coversion...");
+                return;
+            } else {
+                result = n * 2.204623;
+                Console.WriteLine("Result: {0} kilograms = {1} pounds.", n, result);
+            }
+        }
     }
 }
 
