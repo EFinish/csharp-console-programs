@@ -141,7 +141,7 @@ class BeginningApp
             }
         } else if (input == "kg") {
             //convert kg to pounds
-            Console.WriteLine("Kilograms selected.\nPlease enter the number of pounds to convert to kilograms:");
+            Console.WriteLine("Kilograms selected.\nPlease enter the number of kilograms to convert to pounds:");
             input = Console.ReadLine();
             if (!(double.TryParse(input, out n))) {
                 Console.WriteLine("ERROR: Input must be a number. Exiting imperial/metric weight coversion...");
@@ -150,6 +150,10 @@ class BeginningApp
                 result = n * 2.204623;
                 Console.WriteLine("Result: {0} kilograms = {1} pounds.", n, result);
             }
+        } else {
+            //invalid input
+            Console.WriteLine("ERROR: Input must be either lbs or kg. Exiting imperial metric weight conversion...");
+            return;
         }
     }
 }
