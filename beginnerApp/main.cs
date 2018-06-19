@@ -6,7 +6,7 @@ namespace beginnerApp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Please input your name:");
+            Console.WriteLine("***********\nBASIC CONSOLE APPLICATION\n***********\nPlease input your name:");
             Console.WriteLine("Name given: {0}", Console.ReadLine());
             AppConfig config = new AppConfig();
             string[] actions = config.getActions();
