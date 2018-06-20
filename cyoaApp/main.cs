@@ -7,8 +7,9 @@ namespace cyoaApp
         static void Main(string[] args)
         {
             Console.WriteLine("***********\nCHOOSE YOUR OWN ADVENTURE APPLICATION\n***********\nPlease input your name:");
-            // Console.WriteLine("Name given: {0}", Console.ReadLine());
-            // AppConfig config = new AppConfig();
+            string name = Console.ReadLine();
+            Console.WriteLine("Name given: {0}", name);
+            AppConfig config = new AppConfig(name);
             // string[] actions = config.getActions();
             // while (config.getAppRunning()) {
             //     Console.WriteLine("Please select a choice");
@@ -28,5 +29,5 @@ namespace cyoaApp
             //     }
             // }
         }
-
+    }
 }
