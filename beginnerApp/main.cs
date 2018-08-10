@@ -161,9 +161,23 @@ namespace beginnerApp
         public static void arraysToJsonString()
         {
             Console.WriteLine("****Arrays of Strings to JSON string****");
+            //init values
             int arrayLen = 30;
-            string [] keyArray = new string [arrayLen];
-            string [] valueArray = new string [arrayLen];
+            char [] keyArray = new char [arrayLen];
+            char [] valueArray = new char [arrayLen];
+            string itsyBitsy = 
+                "TheitsybitsyspiderClimbedupthewaterspoutDowncametherainAndwashedthespideroutOutcamethesunAnddriedupalltherainAndtheitsy-bitsyspiderClimbedupthespoutagain";
+            char [] itsyBitsyChar = itsyBitsy.ToCharArray();
+
+            //put char values into key and value arrays
+            int x = 0;
+            for (int i = 0; i < arrayLen; i++) {
+                keyArray[i] = itsyBitsyChar[x++];
+                valueArray[i] = itsyBitsyChar[x++];
+            }
+            
+            //loop through values and populate strong to be json
+
             string jsonString = "{";
             for (int i = 0; i < arrayLen; i++) {
                 Console.WriteLine("{0} => {1}", keyArray[i], valueArray[i]);
@@ -173,6 +187,8 @@ namespace beginnerApp
                 }
             }
             jsonString += "}";
+
+            //done
             Console.WriteLine("JSON STRING: {0}", jsonString);
         }
     }
