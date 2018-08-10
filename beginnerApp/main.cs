@@ -157,5 +157,23 @@ namespace beginnerApp
                 return;
             }
         }
+
+        public static void arraysToJsonString()
+        {
+            Console.WriteLine("****Arrays of Strings to JSON string****");
+            int arrayLen = 30;
+            string [] keyArray = new string [arrayLen];
+            string [] valueArray = new string [arrayLen];
+            string jsonString = "{";
+            for (int i = 0; i < arrayLen; i++) {
+                Console.WriteLine("{0} => {1}", keyArray[i], valueArray[i]);
+                jsonString += keyArray[i] + ":" + valueArray[i];
+                if (i+1 != arrayLen) {
+                    jsonString += ",";
+                }
+            }
+            jsonString += "}";
+            Console.WriteLine("JSON STRING: {0}", jsonString);
+        }
     }
 }

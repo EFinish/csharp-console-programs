@@ -28,6 +28,10 @@ namespace beginnerApp
             new Action(
                 "Imperial/Metric Weight Conversion",
                 BeginningApp.imperialMetricWeightConversion
+            ),
+            new Action(
+                "Arrays of Strings to JSON string",
+                BeginningApp.arraysToJsonString
             )
         };
 
